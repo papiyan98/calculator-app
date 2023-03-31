@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="shortcut icon" href="./calculator.ico" type="image/x-icon">
+</head>
+<body>
+  <div class="container">
+    <div class="app">
+      <div class="display">0</div>
+      <div class="buttons">
+        <div class="btn white" data-clear>AC</div>
+        <div class="btn white" data-sign>±</div>
+        <div class="btn white" data-percent>%</div>
+        <div class="btn orange" data-action="/">÷</div>
+      </div>
+      <div class="buttons">
+        <div class="btn gray" data-input>7</div>
+        <div class="btn gray" data-input>8</div>
+        <div class="btn gray" data-input>9</div>
+        <div class="btn orange" data-action="*">×</div>
+      </div>
+      <div class="buttons">
+        <div class="btn gray" data-input>4</div>
+        <div class="btn gray" data-input>5</div>
+        <div class="btn gray" data-input>6</div>
+        <div class="btn orange" data-action="-">–</div>
+      </div>
+      <div class="buttons">
+        <div class="btn gray" data-input>1</div>
+        <div class="btn gray" data-input>2</div>
+        <div class="btn gray" data-input>3</div>
+        <div class="btn orange" data-action="+">+</div>
+      </div>
+      <div class="buttons">
+        <div class="btn large gray" data-input>0</div>
+        <div class="btn gray" data-input>,</div>
+        <div class="btn orange" data-equals>=</div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
