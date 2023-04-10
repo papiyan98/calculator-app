@@ -3,62 +3,47 @@
 import Calculator from "./calculator.js";
 
 const display = document.querySelector('.display');
-const signKey = document.querySelector('[data-sign]');
-const equalKey = document.querySelector('[data-equals]');
-const percentKey = document.querySelector('[data-percent]');
-const deleteKey = document.querySelector('[data-clear]');
-
-const allKeys = document.querySelectorAll('.btn');
-const inputKeys = document.querySelectorAll('[data-input]');
-const actionKeys = document.querySelectorAll('[data-action]');
+const deleteButton = document.querySelector('[data-clear]');
 
 const calculator = new Calculator(display);
 
-inputKeys.forEach(key => {
-  key.addEventListener('click', event => {
+document.addEventListener('click', function(event) {
+  if (event.target.hasAttribute('data-input')) {
     calculator.setOperand(event.target.textContent);
     calculator.updateDisplay();
-  });
-});
+  }
 
-actionKeys.forEach(key => {
-  key.addEventListener('click', event => {
-    calculator.setOperation(event.target.getAttribute('data-action'));
-  });
-});
+  if (event.target.hasAttribute('data-action')) {
+    let operator = event.target.getAttribute('data-action');
+    calculator.setOperation(operator);
+  }
 
-allKeys.forEach(key => {
-  key.addEventListener('click', event => {
-    if (!event.target.hasAttribute('data-clear') && !event.target.hasAttribute('data-equals')) {
-      deleteKey.textContent = 'C';
-    }
-  })
-});
-
-deleteKey.addEventListener('click', () => {
-  if (deleteKey.textContent === 'C') {
-    calculator.delete();
-    calculator.updateDisplay();
-    deleteKey.textContent = 'AC';
-  } else {
-    calculator.clear();
+  if (event.target.hasAttribute('data-equals')) {
+    calculator.compute();
     calculator.updateDisplay();
   }
-});
 
-equalKey.addEventListener('click', () => {
-  calculator.compute();
-  calculator.updateDisplay();
-});
+  if (event.target.hasAttribute('data-clear')) {
+    if (event.target.textContent === 'C') {
+      calculator.clear();
+      calculator.updateDisplay();
+      event.target.textContent = 'AC';
+    }
+  }
 
-signKey.addEventListener('click', () => {
-  calculator.changeSign();
-  calculator.updateDisplay();
-});
+  if (event.target.hasAttribute('data-sign')) {
+    calculator.changeSign();
+    calculator.updateDisplay();
+  }
 
-percentKey.addEventListener('click', () => {
-  calculator.calcPercentage();
-  calculator.updateDisplay();
+  if (event.target.hasAttribute('data-percent')) {
+    calculator.calcPercentage();
+    calculator.updateDisplay();
+  }
+
+  if (event.target.classList.contains('btn') && !event.target.hasAttribute('data-clear') && !event.target.hasAttribute('data-equals')) {
+    deleteButton.textContent = 'C';
+  }
 });
 
 document.addEventListener('keydown', event => {
@@ -69,21 +54,21 @@ document.addEventListener('keydown', event => {
     event.preventDefault();
     calculator.setOperand(event.key);
     calculator.updateDisplay();
-    deleteKey.textContent = 'C';
+    deleteButton.textContent = 'C';
   }
 
   if (event.key === '.' || event.key === ',') {
     event.preventDefault();
     calculator.setOperand(event.key);
     calculator.updateDisplay();
-    deleteKey.textContent = 'C';
+    deleteButton.textContent = 'C';
   }
 
   if (event.key.match(operatorPattern)) {
     event.preventDefault();
     calculator.setOperation(event.key);
     calculator.updateDisplay();
-    deleteKey.textContent = 'C';
+    deleteButton.textContent = 'C';
   }
 
   if (event.key === "Enter" || event.key === '=') {
@@ -96,13 +81,13 @@ document.addEventListener('keydown', event => {
     event.preventDefault();
     calculator.delete();
     calculator.updateDisplay();
-    deleteKey.textContent = 'AC';
+    deleteButton.textContent = 'AC';
   }
 
   if (event.key === "Delete") {
     event.preventDefault();
     calculator.clear();
     calculator.updateDisplay();
-    deleteKey.textContent = 'AC';
+    deleteButton.textContent = 'AC';
   }
 });
