@@ -2,3 +2,5 @@
 
 Calculator implementation in pure JavaScript. 
 This is a just demo application which demonstrates my knowledge of JavaScpript.
+
+Click on heading to open the app in Github Pages.
